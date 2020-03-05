@@ -73,7 +73,7 @@ const appendPageLinks = (list) => {
             if (event.target.tagName == 'a'){ 
                paginationLink[j].className = ' ';
                event.target.className = "active";
-               showPage(list, i);
+               showPage(list, j+1);
          }
          });
       }
