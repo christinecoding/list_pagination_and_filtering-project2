@@ -68,16 +68,14 @@ const appendPageLinks = (list) => {
             paginationLink.className='';
          }
 
-      for (let j = 0; j < paginationLink.length; j++) {
-         paginationLink[j].addEventListener("click", (event) => {
+         paginationLink[i].addEventListener("click", (event) => {
             if (event.target.tagName == 'a'){ 
-               paginationLink[j].className = ' ';
+               paginationLink[i].className = ' ';
                event.target.className = "active";
                showPage(list, i);
-         }
+            }
          });
       }
-   }
 };
 
 showPage(studentList, 1);
