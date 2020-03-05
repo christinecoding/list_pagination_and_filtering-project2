@@ -32,14 +32,10 @@ const showPage = (list, page) => {
    const startIndex = (page * itemsPerPage) - itemsPerPage;
    const endIndex = page * itemsPerPage;
 
-//    Loop over the list parameter.
-// Inside the loop, display any list item with 
-// an index that is greater than or equal to the start 
-// index variable and less than the end index variable.
    for (let i=0; i<list.length; i++){
       if (i>=startIndex && i<endIndex){
          list[i].style.display = '';
-       }else {
+      } else {
          list[i].style.display = 'none';
        }
    }
@@ -51,43 +47,40 @@ const showPage = (list, page) => {
 ***/
 
 const appendPageLinks = (list) => {
-   const numPages = studentList.length/itemsPerPage;
+   const numPages = Math.ceil(studentList.length/itemsPerPage);
    const paginationDiv = document.createElement('div');
    paginationDiv.className = 'pagination';
    const div = document.querySelector('.page');
    div.appendChild(paginationDiv);
    const paginationUl = document.createElement('ul');
-   paginationUl.parentNode = paginationDiv;
    paginationDiv.appendChild(paginationUl);
-   const paginationLi= document.createElement('li');
-   const paginationLink= document.createElement('a');
-   paginationLi.parentNode = paginationUl;
-   paginationLink.parentNode = paginationLi;
-   paginationUl.appendChild(paginationLi);
-   paginationLi.appendChild(paginationLink);
-
-   for (let i=1; i<=numPages; i++){
-      paginationLi.textContent = i;
-      paginationLink.textContent = i;
-   // if (i==1){
-   //    link.className='active';
-   }
  
-   // paginationLink.addEventListener('click', (event) => {
-   // // if ( )
-   // // create loop to loop through links to put them all individually to inactive
-   
-   // for (let j=0; j<numPages; i++){
-   //    paginationUl.childNodes[j].childNodes[0].className = '';
-   // }
-   // event.target.className = 'active';
-   //    showPage(studentList, i);
-   // });
+   for (let i=1; i<=numPages; i++){
+      const paginationLi= document.createElement('li');
+      const paginationLink= document.createElement('a');
+      paginationUl.appendChild(paginationLi);
+      paginationLi.appendChild(paginationLink);
+      paginationLink.textContent = i;
+      
+      if (i===1){
+         paginationLink.className='active';
+         } else {
+            paginationLink.className='';
+         }
 
- //}
- }
+      for (let j = 0; j < paginationLink.length; j++) {
+         paginationLink[j].addEventListener("click", (event) => {
+            if (event.target.tagName == 'a'){ 
+               paginationLink[j].className = ' ';
+               event.target.className = "active";
+               showPage(list, i);
+         }
+         });
+      }
+   }
+};
 
-
-
+showPage(studentList, 1);
+appendPageLinks(studentList);
 // Remember to delete the comments that came with this file, 
 // and replace them with your own code comments
