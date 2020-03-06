@@ -68,11 +68,12 @@ const appendPageLinks = (list) => {
             paginationLink.className='';
          }
 
-         paginationLink[i].addEventListener("click", (event) => {
-            if (event.target.tagName == 'a'){ 
+         paginationLink.addEventListener("click", (event) => {
+            if (event.target.tagName === 'a'){ 
                paginationLink[i].className = ' ';
                event.target.className = "active";
-               showPage(list, i);
+               showPage(list, paginationLink.textContent);
+               console.log(event.target.tagName);
             }
          });
       }
